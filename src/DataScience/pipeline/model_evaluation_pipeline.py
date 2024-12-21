@@ -2,9 +2,9 @@ from src.DataScience.config.configuration import ConfigurationManager
 from src.DataScience.components.Model_evaluation import ModelEvaluation
 from src.DataScience import logger
 import os
-os.environ['MLFLOW_TRACKING_URI'] = 'https://dagshub.com/hamzajamil4000/datascience.mlflow'
-os.environ['MLFLOW_TRACKING_USERNAME'] = 'hamzajamil4000'
-os.environ['MLFLOW_TRACKING_PASSWORD'] = '399b979be113f8f07ea9d78fb96f09fe4c1faebc' 
+os.environ['MLFLOW_TRACKING_URI'] = 'https://dagshub.com/YOURNAME/datascience.mlflow'
+os.environ['MLFLOW_TRACKING_USERNAME'] = 'YOUR NAME'
+os.environ['MLFLOW_TRACKING_PASSWORD'] = 'YOUR PASSWORD' 
 
 class ModelEvaluationPipeline:
     def __init__(self):
