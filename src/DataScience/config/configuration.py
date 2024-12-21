@@ -1,6 +1,6 @@
 from src.DataScience.constants import *
-from src.DataScience.utils.common import read_yaml, create_directories
-from src.DataScience.entity.config_entity import DataIngestionConfig, DataValidationConfig,DataTransformationConfig, ModelTrainerConfig
+from src.DataScience.utils.common import read_yaml, create_directories, save_json
+from src.DataScience.entity.config_entity import DataIngestionConfig, DataValidationConfig,DataTransformationConfig, ModelTrainerConfig, ModelEvaluationConfig
 
 # building configuration manager
 class ConfigurationManager:
@@ -60,7 +60,7 @@ class ConfigurationManager:
         create_directories([config.root_dir])
 
         model_trainer_config = ModelTrainerConfig(
-            root_dir=self.config.artifacts_root,
+            root_dir=config.root_dir,
             train_data_path=config.train_data_path,
             test_data_path=config.test_data_path,
             model_name=config.model_name,
@@ -69,6 +69,23 @@ class ConfigurationManager:
             target_column=schema.name
         )
         return model_trainer_config
+    
+    def get_model_eval_config(self):
+        config = self.config.model_evaluation
+        params = self.params.ElasticNet
+        schema = self.schema.TARGET_COLUMN
+
+        create_directories([config.root_dir])
+        model_evaluation_config = ModelEvaluationConfig(
+            root_dir=config.root_dir,
+            test_data_path=config.test_data_path,
+            model_path=config.model_path,
+            all_params=params,
+            metric_file_name=config.metric_file_name,
+            target_column=schema.name,
+            mlflow_uri='https://dagshub.com/hamzajamil4000/datascience.mlflow'
+        )
+        return model_evaluation_config
     
 
 
